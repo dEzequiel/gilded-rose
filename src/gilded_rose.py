@@ -61,3 +61,9 @@ class Aged_Brie(Stock_Item):
 
     def update_quality(self):
         self.improve_quality(2) if self.expired_item() else self.improve_quality(1)
+
+class Sulfuras(Stock_Item):
+    
+    def update_quality(self):
+       self.quality = LEGENDARY_ITEM_QUALITY
+
