@@ -1,19 +1,16 @@
-from ast import Expression, expr
-from cmath import exp
-from random import expovariate
-from winreg import ExpandEnvironmentStrings
-from src.item import Item
-
 # Constants
 
-AGED_BRIE = "Aged Brie"
-BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert"
-SULFURAS = "Sulfuras, Hand of Ragnaros"
 TEN_DAYS = 10
 FIVE_DAYS = 5
 MAX_ITEM_QUALITY = 50
 MIN_ITEM_QUALITY = 0
 LEGENDARY_ITEM_QUALITY = 80    
+
+ZERO = 0
+ONE = 1
+TWO = 2
+THREE = 3
+FOUR = 4
 
 class Gilded_Rose(object):
     
@@ -40,10 +37,10 @@ class Item:
 class Stock_Item(Item):
 
     def expired_item(self):
-        return self.sell_in < 0
+        return self.sell_in < ZERO
     
     def expired_counter(self):
-        self.sell_in -= 1
+        self.sell_in -= ONE
         self.update_quality()
     
     def set_quality(self, value):
@@ -58,19 +55,19 @@ class Stock_Item(Item):
         self.quality = MIN_ITEM_QUALITY if self.quality < MIN_ITEM_QUALITY else 0
 
     def update_quality(self):
-        self.reduce_quality(2) if self.expired_item() else self.reduce_quality(1)
+        self.reduce_quality(TWO) if self.expired_item() else self.reduce_quality(ONE)
 
 class Normal_Item(Stock_Item):
 
     def expired_counter(self):
-        self.sell_in -= 1
+        self.sell_in -= ONE
 
     def update_quality(self):
         if self.expired_item():
             self.set_quality(MIN_ITEM_QUALITY) 
         else:
             self.expired_counter()
-            self.reduce_quality(1)
+            self.reduce_quality(ONE)
 
 class Aged_Brie(Stock_Item):
 
@@ -88,16 +85,16 @@ class Backstage_Pass(Stock_Item):
         if self.expired_item():
             self.quality = MIN_ITEM_QUALITY
         elif self.sell_in < FIVE_DAYS:
-            self.improve_quality(3)
+            self.improve_quality(THREE)
         elif self.sell_in < TEN_DAYS:
-            self.improve_quality(2)
+            self.improve_quality(TWO)
         else:
-            self.improve_quality(1)
+            self.improve_quality(ONE)
 
 class Conjured_Item(Stock_Item):
     
     def update_quality(self):
-        if self.sell_in >= 0:
-            self.reduce_quality(2)
+        if self.sell_in >= ZERO:
+            self.reduce_quality(TWO)
         else:
-            self.reduce_quality(4)
+            self.reduce_quality(FOUR)
