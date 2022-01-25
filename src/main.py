@@ -44,7 +44,13 @@ class Normal_Item(Item, Interface):
 
         ### ASSERT 
     
+    # Override update_quality() from Interface class
+    # Everytime this method is called, sell_in and quality attributes are updated
     def update_quality(self):
         if self.sell_in > 0:
-            
+            self.set_quality(-1)
+        else:
+            self.set_quality(-2)
+        
+        self.set_sell_in()
     
