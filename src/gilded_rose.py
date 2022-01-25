@@ -33,8 +33,12 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
+class Interface(Item):
+    def update_quality():
+        pass
+
 class Stock_Item(Item):
-    
+
     def expired_item(self):
         return self.sell_in < 0
     
@@ -44,16 +48,16 @@ class Stock_Item(Item):
     
     def improve_quality(self, value):
         self.quality += value
-        if self.quality >= MAX_ITEM_QUALITY:
-            self.quality = MAX_ITEM_QUALITY
+        self.quality = MAX_ITEM_QUALITY if self.quality >= MAX_ITEM_QUALITY else 0
     
     def reduce_quality(self, value):
         self.quality -= value
-        if self.quality < MIN_ITEM_QUALITY:
-            self.quality = MIN_ITEM_QUALITY
-    
+        self.quality = MIN_ITEM_QUALITY if self.quality < MIN_ITEM_QUALITY else 0
+
     def update_quality(self):
-        if expired_item():
-            self.reduce_quality(2)
-        else:
-            self.reduce_quality(1)
+        self.reduce_quality(2) if self.expired_item() else self.reduce_quality(1)
+
+class Aged_Brie(Stock_Item):
+
+    def update_quality(self):
+        self.improve_quality(2) if self.expired_item() else self.improve_quality(1)
