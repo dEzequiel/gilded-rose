@@ -46,6 +46,9 @@ class Stock_Item(Item):
         self.sell_in -= 1
         self.update_quality()
     
+    def set_quality(self, value):
+        self.quality = value
+
     def improve_quality(self, value):
         self.quality += value
         self.quality = MAX_ITEM_QUALITY if self.quality >= MAX_ITEM_QUALITY else 0
@@ -61,9 +64,6 @@ class Normal_Item(Stock_Item):
 
     def expired_counter(self):
         self.sell_in -= 1
-
-    def set_quality(self, value):
-        self.quality = value
 
     def update_quality(self):
         if self.expired_item():
@@ -94,7 +94,10 @@ class Backstage_Pass(Stock_Item):
         else:
             self.improve_quality(1)
 
-# class Conjured_Item(Stock_Item):
+class Conjured_Item(Stock_Item):
     
-#     def update_quality(self):
-#         self.reduce_quality(4)
+    def update_quality(self):
+        if self.sell_in >= 0:
+            self.reduce_quality(2)
+        else:
+            self.reduce_quality(4)
