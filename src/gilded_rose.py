@@ -1,4 +1,6 @@
+from ast import Expression, expr
 from random import expovariate
+from winreg import ExpandEnvironmentStrings
 from src.item import Item
 
 # Constants
@@ -67,3 +69,14 @@ class Sulfuras(Stock_Item):
     def update_quality(self):
        self.quality = LEGENDARY_ITEM_QUALITY
 
+class Backstage_Pass(Stock_Item):
+
+    def update_quality(self):
+        if self.expired_item():
+            self.quality = MIN_ITEM_QUALITY
+        elif self.sell_in < FIVE_DAYS:
+            self.improve_quality(3)
+        elif self.sell_in < TEN_DAYS:
+            self.improve_quality(2)
+        else:
+            self.improve_quality(1)
