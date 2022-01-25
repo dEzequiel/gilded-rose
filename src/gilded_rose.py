@@ -1,3 +1,4 @@
+from random import expovariate
 from src.item import Item
 
 # Constants
@@ -37,4 +38,22 @@ class Stock_Item(Item):
     def expired_item(self):
         return self.sell_in < 0
     
-    def 
+    def expired_counter(self):
+        self.sell_in -= 1
+        self.update_quality()
+    
+    def improve_quality(self, value):
+        self.quality += value
+        if self.quality >= MAX_ITEM_QUALITY:
+            self.quality = MAX_ITEM_QUALITY
+    
+    def reduce_quality(self, value):
+        self.quality -= value
+        if self.quality < MIN_ITEM_QUALITY:
+            self.quality = MIN_ITEM_QUALITY
+    
+    def update_quality(self):
+        if expired_item():
+            self.reduce_quality(2)
+        else:
+            self.reduce_quality(1)
