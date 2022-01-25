@@ -1,3 +1,4 @@
+from curses import noraw
 from tkinter.tix import MAX
 from unicodedata import name
 
@@ -69,4 +70,10 @@ class Conjured_Item(Normal_Item):
             self.set_quality(-4)
         
         self.set_sell_in()
+
+class Aged_Brie(Normal_Item):
+    def __init__(self, name, sell_in, quality):
+        Normal_Item.__init__(name, sell_in, quality)
+    
+ 
         
