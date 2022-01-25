@@ -45,7 +45,7 @@ class Normal_Item(Item, Interface):
         ### ASSERT 
     
     # Override update_quality() from Interface class
-    # Everytime this method is called, sell_in and quality attributes are updated
+    # Everytime this method is called, sell_in and quality attributes are updatedg
     def update_quality(self):
         if self.sell_in > 0:
             self.set_quality(-1)
@@ -54,3 +54,7 @@ class Normal_Item(Item, Interface):
         
         self.set_sell_in()
     
+class Conjured_Item(Normal_Item):
+    
+    def __init__(self, name, sell_in, quality):
+        Normal_Item.__init__(name, sell_in, quality)
