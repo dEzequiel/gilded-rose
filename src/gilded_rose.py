@@ -1,5 +1,8 @@
 # Constants
 
+from ast import Expression
+
+
 TEN_DAYS = 10
 FIVE_DAYS = 5
 MAX_ITEM_QUALITY = 50
@@ -52,7 +55,7 @@ class Stock_Item(Item):
     
     def reduce_quality(self, value):
         self.quality -= value
-        self.quality = MIN_ITEM_QUALITY if self.quality < MIN_ITEM_QUALITY else 0
+        # self.quality = MIN_ITEM_QUALITY if self.quality < MIN_ITEM_QUALITY else 0
 
     def update_quality(self):
         self.reduce_quality(TWO) if self.expired_item() else self.reduce_quality(ONE)
@@ -62,12 +65,14 @@ class Normal_Item(Stock_Item):
     def expired_counter(self):
         self.sell_in -= ONE
 
-    def update_quality(self):
-        if self.expired_item():
-            self.set_quality(MIN_ITEM_QUALITY) 
-        else:
+    def update_quality(self):   
+        if self.sell_in > ZERO:
             self.expired_counter()
             self.reduce_quality(ONE)
+        else:
+            self.set_quality(0)
+        
+        
 
 class Aged_Brie(Stock_Item):
 
