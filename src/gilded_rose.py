@@ -1,8 +1,5 @@
 # Constants
 
-from ast import Expression
-
-
 TEN_DAYS = 10
 FIVE_DAYS = 5
 MAX_ITEM_QUALITY = 50
@@ -40,22 +37,45 @@ class Item:
 class Stock_Item(Item):
 
     def expired_item(self):
-        return self.sell_in < ZERO
-    
+        
+        # if self.sell_in <= 0:
+        #     self.set_quality(ZERO)
+        
+        if self.sell_in == ZERO:
+            self.set_quality(ZERO)
+            self.sell_in -= ONE
+
+        # elif self.sell_in > ZERO:
+        #     self.sell_in -= ONE
+        #     self.reduce_quality(ONE)
+        else:
+            self.sell_in -= ONE
+            self.reduce_quality(ONE)
+            
     def expired_counter(self):
         self.sell_in -= ONE
-        self.update_quality()
+        # self.update_quality()
+        
+    def expired_counter_one(self):
+        self.sell_in -= ONE
     
     def set_quality(self, value):
+        if value < 0:
+            self.quality = MIN_ITEM_QUALITY
+        
         self.quality = value
 
     def improve_quality(self, value):
         self.quality += value
-        self.quality = MAX_ITEM_QUALITY if self.quality >= MAX_ITEM_QUALITY else 0
+
+        if self.quality > MAX_ITEM_QUALITY:
+            self.quality = MAX_ITEM_QUALITY
     
     def reduce_quality(self, value):
         self.quality -= value
-        # self.quality = MIN_ITEM_QUALITY if self.quality < MIN_ITEM_QUALITY else 0
+        
+        if self.quality < 0:
+            self.quality = MIN_ITEM_QUALITY
 
     def update_quality(self):
         self.reduce_quality(TWO) if self.expired_item() else self.reduce_quality(ONE)
@@ -64,21 +84,34 @@ class Normal_Item(Stock_Item):
 
     def expired_counter(self):
         self.sell_in -= ONE
-
+    
     def update_quality(self):   
-        if self.sell_in > ZERO:
-            self.expired_counter()
-            self.reduce_quality(ONE)
-        else:
-            self.set_quality(0)
         
+        self.expired_item()
+        
+        # if self.sell_in < 0:
+        #     self.expired_counter_one
+        #     self.set_quality(ZERO)
+        # else:
+        #     self.expired_counter_one()
+        #     self.reduce_quality(ONE)
         
 
 class Aged_Brie(Stock_Item):
 
+    def expired_item(self):
+        if self.sell_in <= ZERO:
+            self.improve_quality(TWO)
+            self.sell_in -= ONE
+        else:
+            self.expired_counter_one()
+            self.improve_quality(ONE)
+        
     def update_quality(self):
-        self.improve_quality(2) if self.expired_item() else self.improve_quality(1)
-
+        # self.improve_quality(2) if self.expired_item() else self.improve_quality(1)
+        self.expired_item()
+        
+        
 class Sulfuras(Stock_Item):
     
     def update_quality(self):
