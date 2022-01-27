@@ -36,7 +36,7 @@ class Item:
 
 class Stock_Item(Item):
 
-    def expired_item(self):
+    def expired_sell_in(self):
         
         # if self.sell_in <= 0:
         #     self.set_quality(ZERO)
@@ -56,7 +56,7 @@ class Stock_Item(Item):
         self.sell_in -= ONE
         # self.update_quality()
         
-    def expired_counter_one(self):
+    def decrease_sell_in(self):
         self.sell_in -= ONE
     
     def set_quality(self, value):
@@ -78,7 +78,7 @@ class Stock_Item(Item):
             self.quality = MIN_ITEM_QUALITY
 
     def update_quality(self):
-        self.reduce_quality(TWO) if self.expired_item() else self.reduce_quality(ONE)
+        self.reduce_quality(TWO) if self.expired_sell_in() else self.reduce_quality(ONE)
 
 class Normal_Item(Stock_Item):
 
@@ -87,29 +87,29 @@ class Normal_Item(Stock_Item):
     
     def update_quality(self):   
         
-        self.expired_item()
+        self.expired_sell_in()
         
         # if self.sell_in < 0:
-        #     self.expired_counter_one
+        #     self.decrease_sell_in
         #     self.set_quality(ZERO)
         # else:
-        #     self.expired_counter_one()
+        #     self.decrease_sell_in()
         #     self.reduce_quality(ONE)
         
 
 class Aged_Brie(Stock_Item):
 
-    def expired_item(self):
+    def expired_sell_in(self):
         if self.sell_in <= ZERO:
             self.improve_quality(TWO)
             self.sell_in -= ONE
         else:
-            self.expired_counter_one()
+            self.decrease_sell_in()
             self.improve_quality(ONE)
         
     def update_quality(self):
-        # self.improve_quality(2) if self.expired_item() else self.improve_quality(1)
-        self.expired_item()
+        # self.improve_quality(2) if self.expired_sell_in() else self.improve_quality(1)
+        self.expired_sell_in()
         
         
 class Sulfuras(Stock_Item):
@@ -120,7 +120,7 @@ class Sulfuras(Stock_Item):
 class Backstage_Pass(Stock_Item):
 
     def update_quality(self):
-        if self.expired_item():
+        if self.expired_sell_in():
             self.quality = MIN_ITEM_QUALITY
         elif self.sell_in < FIVE_DAYS:
             self.improve_quality(THREE)
