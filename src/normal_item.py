@@ -1,5 +1,14 @@
-from gilded_rose import Gilded_Rose, Normal_Item
+from gilded_rose import Gilded_Rose
+from stock_item import Stock_Item
+from values import Value
 
+class Normal_Item(Stock_Item):
+    
+    def update_quality(self):
+
+        self.decrease_sell_in()
+        self.reduce_quality(Value.ONE)
+        
 if __name__ == '__main__': 
 
     item = [Normal_Item("Elixir of the Mongoose", 5, 7)]
