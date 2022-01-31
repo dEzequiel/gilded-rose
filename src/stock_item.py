@@ -19,6 +19,9 @@ class Stock_Item(Item):
     def improve_quality(self, amount):
         self.quality += amount
 
+        if self.quality > Value.MAX_ITEM_QUALITY.value:
+            self.quality = Value.MAX_ITEM_QUALITY.value
+
     def reduce_quality(self, amount):
         self.quality -= amount
         if self.quality < Value.ZERO.value:
