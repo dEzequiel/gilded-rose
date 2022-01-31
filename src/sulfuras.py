@@ -1,4 +1,11 @@
-from gilded_rose import Gilded_Rose, Sulfuras
+from gilded_rose import Gilded_Rose
+from stock_item import Stock_Item
+from values import Value
+
+class Sulfuras(Stock_Item):
+
+    def update_quality(self):
+        pass
 
 if __name__ == '__main__': 
 
