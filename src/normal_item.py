@@ -6,8 +6,12 @@ class Normal_Item(Stock_Item):
     
     def update_quality(self):
 
+        if self.get_sell_in() <= Value.ZERO.value:
+            self.set_quality(Value.ZERO.value)
+        else:
+            self.reduce_quality(Value.ONE.value)
+        
         self.decrease_sell_in()
-        self.reduce_quality(Value.ONE)
         
 if __name__ == '__main__': 
 
