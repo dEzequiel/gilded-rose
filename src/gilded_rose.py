@@ -68,8 +68,8 @@ class Stock_Item(Item):
     def improve_quality(self, value):
         self.quality += value
 
-        if self.quality > MAX_ITEM_QUALITY:
-            self.quality = MAX_ITEM_QUALITY
+        # if self.quality > MAX_ITEM_QUALITY:
+        #     self.quality = MAX_ITEM_QUALITY
     
     def reduce_quality(self, value):
         self.quality -= value
@@ -105,7 +105,7 @@ class Aged_Brie(Stock_Item):
             self.sell_in -= ONE
         else:
             self.decrease_sell_in()
-            self.improve_quality(ONE)
+            self.quality += 1
         
     def update_quality(self):
         # self.improve_quality(2) if self.expired_sell_in() else self.improve_quality(1)
@@ -115,19 +115,36 @@ class Aged_Brie(Stock_Item):
 class Sulfuras(Stock_Item):
     
     def update_quality(self):
-       self.quality = LEGENDARY_ITEM_QUALITY
+        self.quality = LEGENDARY_ITEM_QUALITY
 
 class Backstage_Pass(Stock_Item):
 
-    def update_quality(self):
-        if self.expired_sell_in():
-            self.quality = MIN_ITEM_QUALITY
-        elif self.sell_in < FIVE_DAYS:
+    def expired_sell_in(self):
+        if self.sell_in <= ZERO:
+            self.quality = ZERO
+    
+    def ten_days_or_less(self):
+        if self.sell_in > 5 and self.sell_in <= 10:
+            self.quality += 2
+            self.sell_in -= 1
+    
+    def five_days_or_less(self):
+        if self.sell_in <= 5:
             self.improve_quality(THREE)
-        elif self.sell_in < TEN_DAYS:
-            self.improve_quality(TWO)
-        else:
-            self.improve_quality(ONE)
+            self.sell_in -= 1
+        
+    def update_quality(self):
+        if self.sell_in > 10:
+            self.improve_quality(1)
+            self.sell_in -= 1
+        
+        self.ten_days_or_less()
+        self.five_days_or_less()
+        
+        if not self.ten_days_or_less and not self.five_days_or_less():
+            self.expired_sell_in()
+        
+        
 
 class Conjured_Item(Stock_Item):
     
