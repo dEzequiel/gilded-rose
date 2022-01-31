@@ -4,7 +4,7 @@ from values import Value
 
 class Aged_Brie(Stock_Item):
     
-    def decrease_sell_in(self):
+    def update_quality(self):
 
         if self.sell_in <= Value.ZERO.value:
             self.improve_quality(Value.TWO.value)
@@ -12,9 +12,6 @@ class Aged_Brie(Stock_Item):
             self.improve_quality(Value.ONE.value)
 
         self.sell_in -= Value.ONE.value    
-
-    def update_quality(self):
-        self.decrease_sell_in()
 
 
 if __name__ == '__main__': 
