@@ -5,8 +5,10 @@ from src.values import Value
 class Conjured_Item(Stock_Item):
     
     def update_quality(self):
-        if self.get_sell_in() > Value.ZERO.value:
-            self.reduce_quality(Value.TWO.value)
+        if self.get_sell_in() >= Value.ZERO.value:
+            self.reduce_quality(Value.ONE.value)
+        elif self.get_sell_in() < Value.ZERO.value:
+            self.set_quality(Value.ZERO.value)
         else:
             self.reduce_quality(Value.FOUR.value)
 
