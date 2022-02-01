@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-class Values(IntEnum):
+class Value(IntEnum):
 
     TEN_DAYS = 10
     FIVE_DAYS = 5
@@ -13,3 +13,4 @@ class Values(IntEnum):
     TWO = 2
     THREE = 3
     FOUR = 4
+    FIVE = 5
