@@ -7,7 +7,7 @@ def test_backstage_passes_item_IF():
     backstage_passses_item.update_quality()
 
     assert 22 == backstage_passses_item.quality
-    assert 19 == backstage_passses_item.sell_in
+    assert 9 == backstage_passses_item.sell_in
 
 @pytest.mark.test_backstage_passes_item_FIRST_ELIF
 def test_backstage_passes_item_IF():
@@ -15,7 +15,7 @@ def test_backstage_passes_item_IF():
     backstage_passses_item.update_quality()
 
     assert 23 == backstage_passses_item.quality
-    assert 19 == backstage_passses_item.sell_in
+    assert 4 == backstage_passses_item.sell_in
 
 
 @pytest.mark.test_backstage_passes_item_SECOND_ELIF
@@ -24,7 +24,7 @@ def test_backstage_passes_item_IF():
     backstage_passses_item.update_quality()
 
     assert 0 == backstage_passses_item.quality
-    assert 19 == backstage_passses_item.sell_in
+    assert 0 == backstage_passses_item.sell_in
 
 @pytest.mark.test_backstage_passes_item_ELSE
 def test_backstage_passes_item_IF():
@@ -32,4 +32,4 @@ def test_backstage_passes_item_IF():
     backstage_passses_item.update_quality()
 
     assert 21 == backstage_passses_item.quality
-    assert 19 == backstage_passses_item.sell_in
+    assert 14 == backstage_passses_item.sell_in

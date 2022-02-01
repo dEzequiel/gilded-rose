@@ -20,17 +20,17 @@ def test_set_quality():
 @pytest.mark.test_decrease_sell_in
 def test_decrease_sell_in():
     stock_item.decrease_sell_in()
-    assert 5 == stock_item.get_sell_in()
+    assert 4 == stock_item.get_sell_in()
 
 @pytest.mark.test_improve_quality
 def test_improve_quality():
     stock_item.improve_quality(2)
-    assert 7 == stock_item.get_quality()
+    assert 8 == stock_item.get_quality()
 
 @pytest.mark.test_reduce_quality
 def test_reduce_quality():
     stock_item.reduce_quality(1)
-    assert 4 == stock_item.get_quality()
+    assert 7 == stock_item.get_quality()
 
 @pytest.mark.test_quality_checker
 def test_quality_checker():
