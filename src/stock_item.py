@@ -20,7 +20,6 @@ class Stock_Item(Item):
         self.quality += amount
         self.quality_checker()
 
-
     def reduce_quality(self, amount):
         self.quality -= amount
         self.quality_checker()
@@ -28,8 +27,3 @@ class Stock_Item(Item):
     def quality_checker(self):
         if self.get_quality() > Value.MAX_ITEM_QUALITY.value:
             self.quality = Value.MAX_ITEM_QUALITY.value
-    
-
-
-    # def update_quality(self):
-    #     self.reduce_quality(Value.TWO) if self.expired_sell_in() else self.reduce_quality(Value.ONE)
