@@ -1,4 +1,3 @@
-from re import S
 import pytest
 from src.stock_item import Stock_Item
 
