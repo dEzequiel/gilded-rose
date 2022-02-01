@@ -6,16 +6,15 @@ class Aged_Brie(Stock_Item):
     
     def update_quality(self):
 
-        if self.sell_in <= Value.ZERO.value:
+        if self.get_sell_in() <= Value.ZERO.value:
             self.improve_quality(Value.TWO.value)
         else:
             self.improve_quality(Value.ONE.value)
 
-        self.sell_in -= Value.ONE.value    
+        self.decrease_sell_in()
 
 
 if __name__ == '__main__': 
-
     item = [Aged_Brie("Aged Brie", 2, 0)]
     gilded_rose = Gilded_Rose(item)
 

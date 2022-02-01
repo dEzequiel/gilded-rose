@@ -1,18 +1,6 @@
-
-from pyparsing import ZeroOrMore
-from pyrsistent import v
 from gilded_rose import Gilded_Rose
-from normal_item import Normal_Item
 from stock_item import Stock_Item
 from values import Value
-
-'''
-Una "Entrada al Backstage", como el queso brie, incrementa su calidad a medida que la fecha de venta se aproxima
-
-    si faltan 10 días o menos para el concierto, la calidad se incrementa en 2 unidades
-    si faltan 5 días o menos, la calidad se incrementa en 3 unidades
-    luego de la fecha de venta la calidad cae a 0
-'''
 
 class Backstage_Pass(Stock_Item):
     
@@ -33,7 +21,6 @@ class Backstage_Pass(Stock_Item):
         self.decrease_sell_in()
 
 if __name__ == '__main__': 
-#Backstage passes to a TAFKAL80ETC concert, 14, 21
     item = [Backstage_Pass("Backstage passes to a TAFKAL80ETC concert", 15, 20)]
     gilded_rose = Gilded_Rose(item)
         

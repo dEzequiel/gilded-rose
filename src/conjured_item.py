@@ -14,7 +14,6 @@ class Conjured_Item(Stock_Item):
         self.decrease_sell_in()
 
 if __name__ == '__main__': 
-#Backstage passes to a TAFKAL80ETC concert, 14, 21
     item = [Conjured_Item("Conjured Mana Cake", 3, 6)]
     gilded_rose = Gilded_Rose(item)
         
