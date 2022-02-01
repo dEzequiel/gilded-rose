@@ -15,3 +15,4 @@ def test_normal_item_quality_zero():
     normal_item.update_quality()
 
     assert 0 == normal_item.quality
+    assert -2 == normal_item.sell_in
