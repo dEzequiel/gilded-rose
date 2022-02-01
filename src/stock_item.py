@@ -1,5 +1,5 @@
-from values import Value
-from gilded_rose import Item
+from src.values import Value
+from src.gilded_rose import Item
 
 class Stock_Item(Item):
     
