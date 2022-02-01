@@ -1,6 +1,6 @@
-from gilded_rose import Gilded_Rose
-from stock_item import Stock_Item
-from values import Value
+from src.gilded_rose import Gilded_Rose
+from src.stock_item import Stock_Item
+from src.values import Value
 
 class Conjured_Item(Stock_Item):
     
@@ -12,12 +12,12 @@ class Conjured_Item(Stock_Item):
 
         self.decrease_sell_in()
 
-if __name__ == '__main__': 
+# if __name__ == '__main__': 
 
-    item = [Conjured_Item("Conjured Mana Cake", 3, 6)]
-    gilded_rose = Gilded_Rose(item)
+#     item = [Conjured_Item("Conjured Mana Cake", 3, 6)]
+#     gilded_rose = Gilded_Rose(item)
 
-    print("Day 0", item)
-    for day in range(1, 31):
-        gilded_rose.update_quality()
-        print("Day", day, item)
+#     print("Day 0", item)
+#     for day in range(1, 31):
+#         gilded_rose.update_quality()
+#         print("Day", day, item)
