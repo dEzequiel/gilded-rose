@@ -1,6 +1,5 @@
 class Gilded_Rose(object):
     
-    # So items can be any type of data structure.
     def __init__(self, items):
         self.items = items
     
@@ -9,7 +8,6 @@ class Gilded_Rose(object):
             item.update_quality()
 
 class Item:
-    # This is just a normal item, no logic, just attributes.
     def __init__(self, name, sell_in, quality):
 
         self.name = name
